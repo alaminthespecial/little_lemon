@@ -4,6 +4,7 @@ package com.techhaal.little_lemon
 
 import android.content.Context
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 //import androidx.compose.material.Button
 //import androidx.compose.material.ButtonDefaults
@@ -39,25 +40,33 @@ fun Onboarding(navController: NavHostController) {
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        // Step 2: Add the Header
-        Spacer(modifier = Modifier.height(20.dp))
-        Header()
-        Spacer(modifier = Modifier.height(40.dp))
-        // Step 4: Collect user input
-        Text(
-            text = "Let's get to know you",
-            fontSize = 16.sp,
-            style = TextStyle(background = Color(0xFF495E57)),
-            modifier = Modifier.padding(16.dp).fillMaxWidth()
 
+        Image(
+            painter = painterResource(R.drawable.logo),
+            contentDescription = "Logo",
+            modifier = Modifier.size(150.dp)
         )
-        Spacer(modifier = Modifier.height(20.dp))
+        // Step 4: Collect user input
+        Box(modifier =
+        Modifier.fillMaxWidth().background(Color(0xFF495E57))) {
+            Text(
+                text = "Lets get to Know you",
+                fontSize = 24.sp,
+                style = TextStyle(
+                    fontWeight = FontWeight.Bold
+                ),
+                modifier = Modifier
+                    .padding(start = 20.dp, bottom = 40.dp)
+
+            )
+        }
         Text(
             text = "Personal Information",
-            fontSize = 16.sp,
-            style = TextStyle(background = Color(0xFF495E57),
+            fontSize = 20.sp,
+            style = TextStyle(
                 fontWeight = FontWeight.Bold),
-            modifier = Modifier.height(100.dp)
+            modifier = Modifier.align(Alignment.Start)
+                .height(100.dp)
                 .padding(20.dp)
 
         )
@@ -99,12 +108,19 @@ fun Onboarding(navController: NavHostController) {
                     showMessage(context, message = "Registration successful!")
                 }
             },
-            modifier = Modifier.width(100.dp)
+            modifier = Modifier
+                .width(300.dp)
                 .height(50.dp)
                 .fillMaxWidth(),
             colors = ButtonDefaults.buttonColors(Color(0xFFF4CE14))
         ) {
-            Text(text = "Register")
+            Text(text = "Register",
+                color = Color(0xFFFFFFFF),
+                fontSize = 16.sp,
+                fontWeight=FontWeight.Bold,
+                modifier = Modifier
+                    .height(25.dp)
+                    .padding(start = 25.dp))
         }
     }
 }

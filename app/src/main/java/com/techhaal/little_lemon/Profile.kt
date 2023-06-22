@@ -34,7 +34,7 @@ fun ProfileNavigate(navController: NavHostController) {
 
     ) {
 
-        Header()
+
         Spacer(modifier = Modifier.height(8.dp))
 
         Column(
