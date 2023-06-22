@@ -1,3 +1,3 @@
 # little_lemon
 changes occurred
-Group 2.jpg
+/home/aminullah/Downloads/imageReadme.jpg
