@@ -1,13 +1,17 @@
 package com.techhaal.little_lemon
 
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
+import com.techhaal.little_lemon.MyDestinations.profile
 
 @Composable
 fun HomeNavigate(navController: NavHostController) {
@@ -18,22 +22,22 @@ fun HomeNavigate(navController: NavHostController) {
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Row(verticalAlignment = Alignment.CenterVertically) {
-//            Image(
-//                painter = painterResource(R.drawable.logo),
-//                contentDescription = "Logo",
-//                modifier = Modifier.size(200.dp)
-//            )
+            Image(
+                painter = painterResource(R.drawable.logo),
+                contentDescription = "Logo",
+                modifier = Modifier.size(200.dp)
+            )
 
-            // Profile button
-//            Image(
-//                painter = painterResource(R.drawable.profile),
-//                contentDescription = "Profile",
-//                modifier = Modifier
-//                    .size(50.dp)
-//                    .clickable {
-//                        navController.navigate(profile)
-//                    }
-//            )
+//             Profile button
+            Image(
+                painter = painterResource(R.drawable.rename),
+                contentDescription = "Profile",
+                modifier = Modifier
+                    .size(50.dp)
+                    .clickable {
+                        navController.navigate(profile)
+                    }
+            )
         }
 
         Column(modifier = Modifier.padding(16.dp)) {
