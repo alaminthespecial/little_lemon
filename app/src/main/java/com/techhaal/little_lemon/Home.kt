@@ -1,6 +1,7 @@
 package com.techhaal.little_lemon
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.MaterialTheme
@@ -8,16 +9,20 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import com.techhaal.little_lemon.MyDestinations.profile
 
 @Composable
 fun HomeNavigate(navController: NavHostController) {
     Column(
-
-        modifier= Modifier.fillMaxSize(),
+//
+//        modifier= Modifier.fillMaxSize(),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
@@ -25,7 +30,7 @@ fun HomeNavigate(navController: NavHostController) {
             Image(
                 painter = painterResource(R.drawable.logo),
                 contentDescription = "Logo",
-                modifier = Modifier.size(200.dp)
+                modifier = Modifier.size(100.dp)
             )
 
 //             Profile button
@@ -39,24 +44,54 @@ fun HomeNavigate(navController: NavHostController) {
                     }
             )
         }
+        Box(
+            modifier = Modifier
+                .background(Color(0xFF495E57)) // Set the background color of the Box
+                 // Occupy the entire available space
+        ) {
+            Column(modifier = Modifier.padding(8.dp)) {
+                Text(
+                    "Little Lemon",
+                    fontWeight = FontWeight.Bold,
+                    color = Color(0xFFE0AD12),
+                    style = MaterialTheme.typography.headlineSmall
+                )
+                Spacer(modifier = Modifier.height(4.dp))
+                Text(
+                    "Chicago",
+                    color = Color(0xFFFFFFFF),
+                    style = MaterialTheme.typography.headlineSmall,
+                    fontWeight = FontWeight.Bold
+                )
+                Spacer(modifier = Modifier.height(4.dp))
 
-        Column(modifier = Modifier.padding(16.dp)) {
-            Text("Restaurant name: Little Lemon", style = MaterialTheme.typography.headlineMedium)
-            Spacer(modifier = Modifier.height(8.dp))
-            Text("City: Chicago", style = MaterialTheme.typography.headlineSmall)
-            Spacer(modifier = Modifier.height(8.dp))
-            Text(
-                "Short description: We are a family-owned Mediterranean restaurant, focused on traditional recipes served with a modern twist",
-                style = MaterialTheme.typography.headlineSmall
-            )
-            Spacer(modifier = Modifier.height(16.dp))
-//            Image(
-//                painter = painterResource(R.drawable.hero_image),
-//                contentDescription = "Hero Image",
-//                modifier = Modifier.fillMaxWidth().height(200.dp),
-//                contentScale = ContentScale.Crop
-//            )
+
+                    Row(
+
+                        verticalAlignment = Alignment.CenterVertically,
+                        modifier = Modifier.fillMaxWidth()
+                        ) {
+
+                        Text(
+                            "We are a family-owned \n Mediterranean restaurant, \n focused on traditional \n recipes served  with a \n modern twist",
+                            color = Color(0xFFFFFFFF),
+                            fontSize = 14.sp,
+                            style = MaterialTheme.typography.headlineSmall
+                        )
+                        Spacer(modifier = Modifier.width(20.dp))
+                        Image(
+                            painter = painterResource(R.drawable.hero_image),
+                            contentDescription = "Hero Image",
+                            modifier = Modifier.width(190.dp).height(200.dp),
+                            contentScale = ContentScale.Crop
+                        )
+
+                    }
+
+
+            }
         }
+
     }
 
 }
