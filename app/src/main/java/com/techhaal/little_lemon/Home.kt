@@ -30,7 +30,7 @@ fun HomeNavigate(navController: NavHostController) {
             Image(
                 painter = painterResource(R.drawable.logo),
                 contentDescription = "Logo",
-                modifier = Modifier.size(100.dp)
+                modifier = Modifier.size(150.dp)
             )
 
 //             Profile button

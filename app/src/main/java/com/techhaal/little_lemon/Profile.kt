@@ -1,12 +1,16 @@
 package com.techhaal.little_lemon
 
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -25,39 +29,74 @@ fun ProfileNavigate(navController: NavHostController) {
     val context = LocalContext.current
     Column(
         modifier= Modifier.fillMaxSize(),
-        verticalArrangement = Arrangement.Center,
+        verticalArrangement = Arrangement.SpaceBetween,
         horizontalAlignment = Alignment.CenterHorizontally
 
     ) {
-        Spacer(modifier = Modifier.height(20.dp))
+
         Header()
-        Spacer(modifier = Modifier.height(20.dp))
+        Spacer(modifier = Modifier.height(8.dp))
 
-        Text(
-            text = "Personal Information",
-            fontSize = 16.sp,
-            style = TextStyle(background = Color(0xFF495E57),
-                fontWeight = FontWeight.Bold),
-            modifier = Modifier.height(100.dp)
-                .padding(20.dp)
+        Column(
+            modifier = Modifier.align(Alignment.Start)
+        ) {
+            Text(
+                text = "Personal Information",
+                fontSize = 16.sp,
+                style = TextStyle(background = Color(0xFFF7FAF9),
+                    fontWeight = FontWeight.Bold),
+                modifier = Modifier
+                    .padding(start = 20.dp, bottom = 40.dp)
 
-        )
-        val userData = SharedPreferencesHelper.getUserData(LocalContext.current)
-        Text(text = "First Name: ${userData.first}")
-        Spacer(modifier = Modifier.height(20.dp))
-        Text(text = "Last Name: ${userData.second}")
-        Spacer(modifier = Modifier.height(20.dp))
-        Text(text = "Email: ${userData.third}")
-        Spacer(modifier = Modifier.height(40.dp))
+            )
+            val userData = SharedPreferencesHelper.getUserData(LocalContext.current)
+            Text(text = "First name", fontWeight = FontWeight.Bold,
+                modifier = Modifier
+                    .padding(start = 20.dp)
+                        )
+            Text(text = " ${userData.first}",
+                modifier = Modifier.padding(start = 20.dp)
+                    .width(360.dp)
+                    .border(2.dp, color = Color(
+                        0xFF221F1F
+            )
+            ))
+            Spacer(modifier = Modifier.height(20.dp))
+            Text(text = "Last name", fontWeight = FontWeight.Bold,
+                modifier = Modifier
+                    .padding(start = 20.dp)
+            )
+            Text(text = "${userData.second}",modifier = Modifier.padding(start = 20.dp)
+                .width(360.dp)
+                .border(2.dp, color = Color(0xFF221F1F))
+                )
+            Spacer(modifier = Modifier.height(20.dp))
+            Text(text = "Email", fontWeight = FontWeight.Bold,
+                modifier = Modifier
+                    .padding(start = 20.dp)
+            )
+            Text(text = " ${userData.third}",modifier = Modifier.padding(start = 20.dp).width(360.dp)
+                .border(2.dp, color = Color(0xFF221F1F))
+                )
+        }
+        Spacer(modifier = Modifier.height(8.dp))
         Button(
+            modifier = Modifier.padding(bottom = 100.dp),
             onClick={
 
                 SharedPreferencesHelper.clearUserData(context)
                 navController.navigate(onBoarding)},
+            colors = ButtonDefaults.buttonColors(Color(0xFFF4CE14))
         ){
-            Text(text = "Log out",
-                fontSize = 16.sp
+            Text("Log out",
+                color = Color.White,
+                fontSize = 16.sp,
+                modifier = Modifier
+                    .width(300.dp)
+                    .height(25.dp)
+                    .padding(start = 80.dp)
             )
+
         }
 
     }
