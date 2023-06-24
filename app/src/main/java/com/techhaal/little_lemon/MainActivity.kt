@@ -1,43 +1,45 @@
 package com.techhaal.little_lemon
 
 import android.content.Context
-import android.content.SharedPreferences
 import android.os.Bundle
-import android.preference.PreferenceManager
+import android.util.Log
 import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.ProvidableCompositionLocal
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.platform.LocalContext
-import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.techhaal.little_lemon.MyDestinations.home
 import com.techhaal.little_lemon.MyDestinations.onBoarding
 import com.techhaal.little_lemon.MyDestinations.profile
+import io.ktor.client.HttpClient
+import io.ktor.client.call.body
+import io.ktor.client.engine.android.Android
+import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
+import io.ktor.client.request.get
+import io.ktor.http.ContentType
+import io.ktor.serialization.kotlinx.json.json
 
 
 class MainActivity : ComponentActivity() {
-
-
-    //var sharedPref : SharedPreferences = this@MainActivity.getPreferences(Context.MODE_PRIVATE)
+   private suspend fun fetchMenu(url: String): List<MenuItemNetwork> {
+        val httpClient = HttpClient(Android){
+            install(ContentNegotiation){
+                json(contentType = ContentType("text", "plain"))
+            }
+        }
+        val  httpResponse: MenuNetwork = httpClient.get(url).body()
+        Log.d("AJSON","this is fetch data ${httpResponse.menu}")
+        return httpResponse.menu
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
-
-
         super.onCreate(savedInstanceState)
-
-//        if (SharedPreferencesHelper.isAppLaunched(context=this)) {
-
         setContent {
             MyNavigation()
         }
-//        } else {
-//            SharedPreferencesHelper.setAppLaunched(context=this)
-//            Onboarding(navController = )
-//        }
-
     }
 }
 
@@ -59,11 +61,6 @@ fun MyNavigation(){
     }
 
 }
-
-//fun userDataIsStored(): Boolean {
-//
-//    return false
-//}
 fun isUserDataStored(context: Context): Boolean {
     val sharedPreferences = context.getSharedPreferences(SharedPreferencesHelper.PREF_NAME, Context.MODE_PRIVATE)
     if(sharedPreferences.contains(SharedPreferencesHelper.KEY_FIRST_NAME)
@@ -87,43 +84,6 @@ fun saveUserData(context: Context, firstName: String, lastName: String, email: S
 fun showMessage(context: Context, message:String){
     Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
 }
-//fun getUserData(context: Context): Triple<String?, String?, String?> {
-//    val sharedPreferences = context.getSharedPreferences(SharedPreferencesHelper.PREF_NAME, Context.MODE_PRIVATE)
-//    val firstName = sharedPreferences.getString(SharedPreferencesHelper.KEY_FIRST_NAME, null)
-//    val lastName = sharedPreferences.getString(SharedPreferencesHelper.KEY_LAST_NAME, null)
-//    val email = sharedPreferences.getString(SharedPreferencesHelper.KEY_EMAIL, null)
-//    return Triple(firstName, lastName, email)
-//}
-//
-//fun isAppLaunched(context: Context): Boolean {
-//    val sharedPreferences = context.getSharedPreferences(SharedPreferencesHelper.PREF_NAME, Context.MODE_PRIVATE)
-//    return sharedPreferences.getBoolean(SharedPreferencesHelper.KEY_APP_LAUNCHED, false)
-//}
-//
-//fun setAppLaunched(context: Context) {
-//    val sharedPreferences = context.getSharedPreferences(SharedPreferencesHelper.PREF_NAME, Context.MODE_PRIVATE)
-//    val editor = sharedPreferences.edit()
-//    editor.putBoolean(SharedPreferencesHelper.KEY_APP_LAUNCHED, true)
-//    editor.apply()
-//}
-//fun saveUserdata(value: String, value1: String, value2: String, context: Context) {
-//    //sharepreferences data save data
-//    val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)
-//    val editor = sharedPreferences.edit()
-//    editor.putString("firstName", value)
-//    editor.putString("lastName", value1)
-//    editor.putString("email", value2)
-//    editor.apply()
-//}
-//
-//fun getUserData(context: Context): Triple<String?, String?, String?> {
-//    val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)
-//    val firstName = sharedPreferences.getString("firstName", null)
-//    val lastName = sharedPreferences.getString("lastName", null)
-//    val email = sharedPreferences.getString("email", null)
-//    return Triple(firstName, lastName, email)
-//}
-
 
 fun mToast(localContext: Context?, value:String){
     Toast.makeText(localContext, value, Toast.LENGTH_LONG).show()

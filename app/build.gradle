@@ -49,6 +49,9 @@ android {
 }
 
 dependencies {
+
+    implementation 'com.google.code.gson:gson:2.10.1'
+    implementation "io.ktor:ktor-client-cio:2.0.1"
     implementation 'androidx.room:room-runtime:2.4.3'
     kapt 'androidx.room:room-compiler:2.4.3'
     implementation 'io.ktor:ktor-client-android:2.1.3'

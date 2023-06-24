@@ -51,12 +51,13 @@ fun Onboarding(navController: NavHostController) {
         Modifier.fillMaxWidth().background(Color(0xFF495E57))) {
             Text(
                 text = "Lets get to Know you",
+                color = Color(0xFFF8FCFA),
                 fontSize = 24.sp,
                 style = TextStyle(
                     fontWeight = FontWeight.Bold
                 ),
                 modifier = Modifier
-                    .padding(start = 20.dp, bottom = 40.dp)
+                    .padding(start = 20.dp, bottom = 50.dp)
 
             )
         }
