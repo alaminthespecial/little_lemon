@@ -34,6 +34,8 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
+import com.bumptech.glide.integration.compose.ExperimentalGlideComposeApi
+import com.bumptech.glide.integration.compose.GlideImage
 import com.techhaal.little_lemon.MyDestinations.profile
 import com.techhaal.little_lemon.ui.theme.MenuItemDao
 import com.techhaal.little_lemon.ui.theme.MenuItemRoom
@@ -293,7 +295,7 @@ fun CategoryButton(category:String, selectedCategory: (sel: String) -> Unit) {
     }
 }
 
-//@OptIn(ExperimentalGlideComposeApi::class)
+@OptIn(ExperimentalGlideComposeApi::class)
 @Composable
 fun MenuItem(item: MenuItemRoom) {
 
@@ -323,10 +325,10 @@ fun MenuItem(item: MenuItemRoom) {
 
             }
 
-//            GlideImage(model = item.imageUrl,
-//                contentDescription = "",
-//                Modifier.size(100.dp, 100.dp),
-//                contentScale = ContentScale.Crop)
+            GlideImage(model = item.imageUrl,
+                contentDescription = "Image ",
+                Modifier.size(100.dp, 100.dp),
+                contentScale = ContentScale.Crop)
         }
     }
 
