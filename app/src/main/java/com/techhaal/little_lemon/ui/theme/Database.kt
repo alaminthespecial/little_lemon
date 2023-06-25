@@ -1,6 +1,6 @@
 package com.techhaal.little_lemon.ui.theme
 
-import androidx.lifecycle.LiveData
+
 import androidx.room.*
 
 @Entity
@@ -17,13 +17,14 @@ data class MenuItemRoom(
 @Dao
 interface MenuItemDao{
     @Query("SELECT * FROM MenuItemRoom")
-    fun getAll(): LiveData<List<MenuItemRoom>>
+    fun getAll(): List<MenuItemRoom>
 
     @Insert
     fun insertAll(vararg menuItems: MenuItemRoom)
 
     @Query("SELECT (SELECT COUNT(*) FROM MenuItemRoom) == 0")
-    fun isEmpty(): Boolean
+     fun isEmpty(): Boolean
+
 }
 
 @Database(entities = [MenuItemRoom::class], version = 1)

@@ -24,17 +24,19 @@ class MyViewModel(application: Application) : AndroidViewModel(application) {
         ).allowMainThreadQueries().build()
     }
 
-    fun getAllDatabaseMenuItems(): LiveData<List<MenuItemRoom>> {
+    fun getAllDatabaseMenuItems(): List<MenuItemRoom> {
         return database.menuItemDao().getAll()
     }
 
     fun fetchMenuDataIfNeeded() {
       viewModelScope.launch(Dispatchers.IO) {
             if (database.menuItemDao().isEmpty()) {
+
                 saveMenuToDatabase(
                     database,
                     fetchMenu("https://raw.githubusercontent.com/Meta-Mobile-Developer-PC/Working-With-Data-API/main/menu.json")
                 )
+               // Log.d("Save Data ", "${database.menuItemDao().getAll()}")
             }
         }
     }
